@@ -1,50 +1,110 @@
-# [PROJECT_NAME] Constitution
-<!-- Example: Spec Constitution, TaskFlow Constitution, etc. -->
+<!--
+Sync Impact Report
+- Version change: (template) → 1.0.0
+- Modified principles: n/a (primeira ratificação; placeholders substituídos)
+- Added principles:
+  I. Simplicidade e Dependências Mínimas
+  II. Código Legível e Organizado
+  III. Interface Responsiva (Mobile-First)
+  IV. Acessibilidade Básica
+  V. Dados Separados da Lógica
+  VI. Requisitos Verificáveis Manualmente
+- Added sections: Restrições Técnicas e de Publicação; Fluxo de Desenvolvimento e Verificação
+- Removed sections: nenhuma
+- Templates (.specify/templates/*): não alterados; leem a constituição em tempo de execução
+- Follow-up TODOs: nenhum
+-->
+
+# Study Flashcards Constitution
 
 ## Core Principles
 
-### [PRINCIPLE_1_NAME]
-<!-- Example: I. Library-First -->
-[PRINCIPLE_1_DESCRIPTION]
-<!-- Example: Every feature starts as a standalone library; Libraries must be self-contained, independently testable, documented; Clear purpose required - no organizational-only libraries -->
+### I. Simplicidade e Dependências Mínimas
 
-### [PRINCIPLE_2_NAME]
-<!-- Example: II. CLI Interface -->
-[PRINCIPLE_2_DESCRIPTION]
-<!-- Example: Every library exposes functionality via CLI; Text in/out protocol: stdin/args → stdout, errors → stderr; Support JSON + human-readable formats -->
+- A aplicação MUST ser construída com HTML, CSS e JavaScript nativos do browser sempre que
+  estes resolvam o problema.
+- Cada dependência externa (biblioteca, framework, ferramenta de build) MUST ser justificada
+  por escrito no plano da funcionalidade, indicando porque a plataforma nativa não basta.
+- Abstrações, configuração ou código "para o futuro" MUST NOT ser introduzidos sem um requisito
+  atual que os exija (YAGNI).
 
-### [PRINCIPLE_3_NAME]
-<!-- Example: III. Test-First (NON-NEGOTIABLE) -->
-[PRINCIPLE_3_DESCRIPTION]
-<!-- Example: TDD mandatory: Tests written → User approved → Tests fail → Then implement; Red-Green-Refactor cycle strictly enforced -->
+**Justificação**: um projeto pequeno ganha mais em manutenção e tempo de carregamento do que
+perde em conveniência ao evitar dependências.
 
-### [PRINCIPLE_4_NAME]
-<!-- Example: IV. Integration Testing -->
-[PRINCIPLE_4_DESCRIPTION]
-<!-- Example: Focus areas requiring integration tests: New library contract tests, Contract changes, Inter-service communication, Shared schemas -->
+### II. Código Legível e Organizado
 
-### [PRINCIPLE_5_NAME]
-<!-- Example: V. Observability, VI. Versioning & Breaking Changes, VII. Simplicity -->
-[PRINCIPLE_5_DESCRIPTION]
-<!-- Example: Text I/O ensures debuggability; Structured logging required; Or: MAJOR.MINOR.BUILD format; Or: Start simple, YAGNI principles -->
+- Ficheiros MUST ter responsabilidade clara (estrutura em HTML, estilo em CSS, comportamento
+  em JS); não se mistura estilo inline nem lógica em atributos HTML salvo justificação.
+- Nomes de funções, variáveis e classes MUST descrever a sua intenção; funções MUST ser curtas
+  e fazer uma coisa.
+- Formatação MUST ser consistente em todo o projeto.
 
-## [SECTION_2_NAME]
-<!-- Example: Additional Constraints, Security Requirements, Performance Standards, etc. -->
+**Justificação**: o código deve ser compreensível por quem o lê pela primeira vez, sem
+explicação adicional.
 
-[SECTION_2_CONTENT]
-<!-- Example: Technology stack requirements, compliance standards, deployment policies, etc. -->
+### III. Interface Responsiva (Mobile-First)
 
-## [SECTION_3_NAME]
-<!-- Example: Development Workflow, Review Process, Quality Gates, etc. -->
+- A interface MUST ser utilizável em ecrãs a partir de 320 px de largura sem scroll horizontal.
+- Alvos de toque MUST ter pelo menos 44×44 px.
+- O layout MUST adaptar-se de telemóvel a desktop usando CSS (media queries, flexbox, grid),
+  sem duplicar conteúdo.
 
-[SECTION_3_CONTENT]
-<!-- Example: Code review requirements, testing gates, deployment approval process, etc. -->
+**Justificação**: o estudo com flashcards acontece frequentemente no telemóvel.
+
+### IV. Acessibilidade Básica
+
+- Texto MUST cumprir contraste mínimo WCAG AA (4.5:1 texto normal, 3:1 texto grande).
+- Todas as ações MUST ser executáveis só com teclado, com ordem de foco lógica e foco visível.
+- Elementos interativos MUST usar elementos HTML semânticos (`button`, `a`, `input`) ou
+  ter papel e nome acessível equivalentes.
+- A página MUST declarar `lang` e ter títulos estruturados.
+
+**Justificação**: acessibilidade básica tem custo baixo quando feita desde o início.
+
+### V. Dados Separados da Lógica
+
+- O conteúdo (baralhos, cartões, textos) MUST viver em ficheiro(s) de dados próprios (ex.: JSON
+  ou módulo JS só com dados), nunca embutido nas funções de lógica ou no HTML.
+- Adicionar ou editar conteúdo MUST ser possível sem alterar código de lógica.
+
+**Justificação**: permite atualizar o material de estudo sem risco de partir a aplicação.
+
+### VI. Requisitos Verificáveis Manualmente
+
+- Cada requisito na especificação MUST ter critério de aceitação observável, verificável por uma
+  pessoa no browser em passos concretos (ex.: "ao premir Espaço, o cartão vira").
+- Requisitos vagos ("rápido", "intuitivo", "bonito") MUST ser reformulados em critérios
+  observáveis ou removidos.
+- Testes automáticos são opcionais; a verificação manual documentada é o critério de aceitação.
+
+**Justificação**: garante que "feito" tem significado objetivo num projeto sem suite de testes.
+
+## Restrições Técnicas e de Publicação
+
+- Aplicação de página única, estática, sem backend nem base de dados remota.
+- Publicação no Netlify como site estático; se houver passo de build, MUST produzir apenas
+  ficheiros estáticos.
+- Persistência, se necessária, MUST ser feita no browser (ex.: `localStorage`).
+- A aplicação MUST funcionar nas versões atuais de Chrome, Firefox e Safari (desktop e mobile).
+
+## Fluxo de Desenvolvimento e Verificação
+
+- Cada funcionalidade segue o fluxo Spec Kit: especificar → planear → tarefas → implementar.
+- O plano de cada funcionalidade MUST incluir uma verificação de conformidade com esta
+  constituição (Constitution Check).
+- Antes de dar uma funcionalidade por concluída, MUST ser executada a lista de verificação manual
+  dos seus critérios de aceitação, incluindo um teste em largura de telemóvel e um percurso
+  completo só com teclado.
 
 ## Governance
-<!-- Example: Constitution supersedes all other practices; Amendments require documentation, approval, migration plan -->
 
-[GOVERNANCE_RULES]
-<!-- Example: All PRs/reviews must verify compliance; Complexity must be justified; Use [GUIDANCE_FILE] for runtime development guidance -->
+- Esta constituição prevalece sobre outras práticas do projeto; desvios MUST ser justificados
+  por escrito no plano da funcionalidade afetada.
+- Alterações à constituição MUST ser feitas via `/speckit-constitution`, com Sync Impact Report
+  e incremento de versão.
+- Versionamento semântico: MAJOR para remoção ou redefinição incompatível de princípios; MINOR
+  para novos princípios ou secções, ou orientação materialmente alargada; PATCH para
+  clarificações e correções de redação.
+- Revisões de código e de especificação MUST verificar conformidade com os princípios I–VI.
 
-**Version**: [CONSTITUTION_VERSION] | **Ratified**: [RATIFICATION_DATE] | **Last Amended**: [LAST_AMENDED_DATE]
-<!-- Example: Version: 2.1.1 | Ratified: 2025-06-13 | Last Amended: 2025-07-16 -->
+**Version**: 1.0.0 | **Ratified**: 2026-11-24 | **Last Amended**: 2026-11-24
